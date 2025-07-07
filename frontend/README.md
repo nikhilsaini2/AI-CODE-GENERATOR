@@ -419,7 +419,7 @@ Enable detailed logging by opening browser developer tools:
 
 ### **Development Setup**
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/yourusername/ai-web-builder.git`
+2. Clone your fork: `git clone https://github.com/shivammourya10/AI_Code_Editor_Generator.git`
 3. Install dependencies: `npm install`
 4. Create feature branch: `git checkout -b feature/amazing-feature`
 5. Make changes and test thoroughly
