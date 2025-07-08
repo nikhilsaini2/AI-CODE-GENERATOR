@@ -336,7 +336,7 @@ Requirements:
 The application should be: ${prompt}
 `;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Updated model name
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Flash model (lower rate limits)
     const result = await model.generateContent(enhancedPrompt);
     const response = await result.response;
     
