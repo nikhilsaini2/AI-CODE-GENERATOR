@@ -4,6 +4,7 @@ import JSZip from 'jszip';
 const NETLIFY_API_BASE = 'https://api.netlify.com/api/v1';
 const GITHUB_API_BASE = 'https://api.github.com';
 const VERCEL_API_BASE = 'https://api.vercel.com';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 // Configuration from environment variables
 const CONFIG = {
@@ -22,6 +23,7 @@ const CONFIG = {
 
 // Debug logging
 console.log('Environment check:', {
+  apiUrl: API_URL,
   netlifyToken: process.env.REACT_APP_NETLIFY_API_TOKEN ? 'Present' : 'Missing',
   tokenLength: process.env.REACT_APP_NETLIFY_API_TOKEN?.length || 0,
   demoMode: CONFIG.demoMode
@@ -73,7 +75,7 @@ export class PublishService {
 
       // Use backend proxy for real Netlify publishing
       console.log('Making request to backend...');
-      const response = await fetch('/api/publish/netlify', {
+      const response = await fetch(`${API_URL}/api/publish/netlify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +121,7 @@ export class PublishService {
 
     try {
       // Use backend proxy for GitHub Pages publishing
-      const response = await fetch('/api/publish/github', {
+      const response = await fetch(`${API_URL}/api/publish/github`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

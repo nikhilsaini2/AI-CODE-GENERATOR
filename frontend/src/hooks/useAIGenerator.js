@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+
 const useAIGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,7 +12,7 @@ const useAIGenerator = () => {
     
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5001/api/generate', { prompt });
+      const response = await axios.post(`${API_URL}/api/generate`, { prompt });
       if (response.data.files) {
         return response.data.files;
       }
