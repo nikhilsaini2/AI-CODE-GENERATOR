@@ -1,16 +1,19 @@
 {
-  "name": "backend",
+  "name": "ai-web-builder-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": ["ai", "web-builder", "backend", "api"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "AI Web Builder Backend API Server",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "axios": "^1.7.0",

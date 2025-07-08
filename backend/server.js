@@ -8,10 +8,18 @@ const JSZip = require('jszip');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5001; // Changed port
+const PORT = process.env.PORT || 5001;
 
-// Middleware
-app.use(cors());
+// Middleware - Updated CORS for production
+app.use(cors({
+  origin: [
+    'http://localhost:3000', // Development
+    'https://ai-code-editor-generator.vercel.app', // Your Vercel deployment
+    /https:\/\/.*\.vercel\.app$/, // Allow all Vercel preview deployments
+    /https:\/\/ai-code-editor-generator-.*\.vercel\.app$/ // Allow all your Vercel branches
+  ],
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' }));
 
 // Initialize Google GenAI
@@ -457,6 +465,25 @@ h1 {
     });
     res.status(500).json({ files: errorFiles });
   }
+});
+
+// Health check endpoints
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    apiVersion: '1.0.0',
+    endpoints: ['/api/generate', '/api/publish/netlify']
+  });
 });
 
 // Start server
