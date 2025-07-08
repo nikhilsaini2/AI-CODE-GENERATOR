@@ -15,10 +15,14 @@ app.use(cors({
   origin: [
     'http://localhost:3000', // Development
     'https://ai-code-editor-generator.vercel.app', // Your Vercel deployment
+    'https://ai-code-editor-generator-git-main-shivammourya10s-projects.vercel.app', // Your specific deployment
+    'https://ai-code-editor-generator-nvnhf2qoh-shivammourya10s-projects.vercel.app', // Another deployment URL
     /https:\/\/.*\.vercel\.app$/, // Allow all Vercel preview deployments
     /https:\/\/ai-code-editor-generator-.*\.vercel\.app$/ // Allow all your Vercel branches
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 app.use(express.json({ limit: '10mb' }));
 
