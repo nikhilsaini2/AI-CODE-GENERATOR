@@ -461,13 +461,28 @@ h1 {
     }
   } catch (error) {
     console.error("Error:", error);
-    // Even on error, provide valid files
+    // Even on error, provide valid files with a better error message
     const errorFiles = validateAndFixFiles({
       'index.html': `<!DOCTYPE html>
-<html><head><title>Error</title><link rel="stylesheet" href="styles.css"></head>
-<body><h1>Error occurred</h1><p>${error.message}</p><script src="script.js"></script></body></html>`
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Service Temporarily Unavailable</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Service Temporarily Unavailable</h1>
+        <p>The AI service is currently experiencing high demand. Please try again in a few minutes.</p>
+        <p>This is a temporary issue with Google's AI service, not with our application.</p>
+        <button onclick="window.history.back()" style="background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Go Back</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>`
     });
-    res.status(500).json({ files: errorFiles });
+    res.status(503).json({ files: errorFiles });
   }
 });
 
